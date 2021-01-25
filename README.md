@@ -1,72 +1,65 @@
+# Analysis of Terry Stops in Seattle
+Flatiron Data Science Project - Phase 3
+<img src= 
+"Images/No_Stopping.jpg" 
+         alt="Stop Sign Image" 
+         align="right"
+         width="275" height="275"> 
+         
+<!---Photo by Kevork Kurdoghlian on Unsplash--->       
+<!---<span>Photo by <a href="https://unsplash.com/@pedroplus?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Pedro da Silva</a> on <a href="https://unsplash.com/s/photos/stop-sign?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>--->
+Prepared and Presented by:  **_Melody Peterson_**  
+[Presentation PDF](https://github.com/melodygr/Classification_Project/blob/main/Terry%20Stop%20Presentation.pdf "Presentation PDF")
 
-# Mod 4 Project - Starter Notebook
+### Business Problem    
+A Terry stop in the United States allows the police to briefly detain a person based on reasonable suspicion of involvement in criminal activity. Reasonable suspicion is a lower standard than probable cause which is needed for arrest. When police stop and search a pedestrian, this is commonly known as a stop and frisk. When police stop an automobile, this is known as a traffic stop. If the police stop a motor vehicle on minor infringements in order to investigate other suspected criminal activity, this is known as a pretextual stop. - [Wikipedia](https://en.wikipedia.org/wiki/Terry_stop#:~:text=A%20Terry%20stop%20in "Terry Stop Definition")
 
-This notebook has been provided to you so that you can make use of the following starter code to help with the trickier parts of preprocessing the Zillow dataset. 
+This classification project attempts to determine the possible demographic variables that determine the arrest outcome of a Terry stop. Modeling is done for inference only as making prediction with the model would be incorporating any possible human bias into the model.
 
-The notebook contains a rough outline the general order you'll likely want to take in this project. You'll notice that most of the areas are left blank. This is so that it's more obvious exactly when you should make use of the starter code provided for preprocessing. 
+### Data    
+This data represents records of police reported stops under Terry v. Ohio, 392 U.S. 1 (1968).  The dataset was created on 04/12/2017 and first published on 05/22/2018 and is provided by the city of Seattle, WA.  There were 45,317 rows and 23 variables.  The classification target is ‘Arrest Flag’.  Initial ‘Arrest Flag’ distribution  ‘N’ - 42585, ‘Y’ - 2732  
 
-**_NOTE:_** The number of empty cells are not meant to infer how much or how little code should be involved in any given step--we've just provided a few for your convenience. Add, delete, and change things around in this notebook as needed!
+### Modeling Process
+In the initial data cleaning/scrubbing phase, place holder values and missing values were treated in ways to best retain as much data as possible while keeping the integrity of the data.  Generally, missing values were binned together into 'Unknown' categories as can be seen in the histograms below.  
+![Subject Age Group](https://github.com/melodygr/Classification_Project/blob/main/Images/subject_age_group.png "Subject Age Group")
+![Precinct](https://github.com/melodygr/Classification_Project/blob/main/Images/precinct.png "Precinct")
 
-# Some Notes Before Starting
+Once the data had been cleaned, initial models were run to help determine if there were any confounding variables as suspected in Stop Resolution.  Issues were found with a feature engineered category of Subject Known Unidentified where none of the data points in this category were positive for the target.  Date was also proving to be confounding because none of the positive target records had occured before a certain date.    
+![Subject ID Comparison](https://github.com/melodygr/Classification_Project/blob/main/Images/subj_known_comparison.png "Subject ID comparison")  
+![Date Dual Plot](https://github.com/melodygr/Classification_Project/blob/main/Images/date_dual_plot.png "Date Dual Plot")  
 
-This project will be one of the more challenging projects you complete in this program. This is because working with Time Series data is a bit different than working with regular datasets. In order to make this a bit less frustrating and help you understand what you need to do (and when you need to do it), we'll quickly review the dataset formats that you'll encounter in this project. 
+An initial baseline model was created using a dummy classifier, and then several models were run and parameters tuned to find the most accurate model.  
 
-## Wide Format vs Long Format
+<img src= 
+"Images/model_performance.png" 
+         alt="Model Performance" 
+         align="center"
+         width="500" height="300">  
+         
+### Misclassified Data
+For the final model, you can see in this graph how the model classified the data versus the actual classifications of the data.  Test accuracy of 67% means
+32.46% of data misclassified.  Of 708 arrests, 35% were classified as arrests.  There were 245 true positives and 63% of positives were misclassified.  
+  
+<img src= 
+"Images/conf_matrix_xgb4.png" 
+         alt="Confusion Matrix" 
+         align="center"
+         width="350" height="300">  
+         
+### Model Parameter Comparison
+The features importances of the two top performing model types show very little in common.
+![Forest2](https://github.com/melodygr/Classification_Project/blob/main/Images/forest_feat.png "Forest2")
+![xgb_clf4](https://github.com/melodygr/Classification_Project/blob/main/Images/xgb_feat.png "xgb_clf4")  
 
-If you take a look at the format of the data in `zillow_data.csv`, you'll notice that the actual Time Series values are stored as separate columns. Here's a sample: 
+### Conclusions  
+* Call Type of 911 appears to be important to the models
+* Other 'Unknown' variables need to be reassessed
+* Recommend engineering new target and features and remodeling
 
-<img src='~/../images/df_head.png'>
-
-You'll notice that the first seven columns look like any other dataset you're used to working with. However, column 8 refers to the median housing sales values for April 1996, column 9 for May 1996, and so on. This This is called **_Wide Format_**, and it makes the dataframe intuitive and easy to read. However, there are problems with this format when it comes to actually learning from the data, because the data only makes sense if you know the name of the column that the data can be found it. Since column names are metadata, our algorithms will miss out on what dates each value is for. This means that before we pass this data to our ARIMA model, we'll need to reshape our dataset to **_Long Format_**. Reshaped into long format, the dataframe above would now look like:
-
-<img src='~/../images/melted1.png'>
-
-There are now many more rows in this dataset--one for each unique time and zipcode combination in the data! Once our dataset is in this format, we'll be able to train an ARIMA model on it. The method used to convert from Wide to Long is `pd.melt()`, and it is common to refer to our dataset as 'melted' after the transition to denote that it is in long format. 
-
-# Helper Functions Provided
-
-Melting a dataset can be tricky if you've never done it before, so you'll see that we have provided a sample function, `melt_data()`, to help you with this step below. Also provided is:
-
-* `get_datetimes()`, a function to deal with converting the column values for datetimes as a pandas series of datetime objects
-* Some good parameters for matplotlib to help make your visualizations more readable. 
-
-Good luck!
-
-
-# Step 1: Load the Data/Filtering for Chosen Zipcodes
-
-# Step 2: Data Preprocessing
-
-
-```python
-def get_datetimes(df):
-    return pd.to_datetime(df.columns.values[1:], format='%Y-%m')
-```
-
-# Step 3: EDA and Visualization
-
-
-```python
-font = {'family' : 'normal',
-        'weight' : 'bold',
-        'size'   : 22}
-
-matplotlib.rc('font', **font)
-
-# NOTE: if you visualizations are too cluttered to read, try calling 'plt.gcf().autofmt_xdate()'!
-```
-
-# Step 4: Reshape from Wide to Long Format
+### Next Steps / Future Work  
+1. Further analyze unknown or missing values
+1. Update ‘Arrest Flag’ with arrest values from ‘Stop Resolution’
+1. Try no SMOTE
+1. Tune Support Vector Classification
 
 
-```python
-def melt_data(df):
-    melted = pd.melt(df, id_vars=['RegionName', 'City', 'State', 'Metro', 'CountyName'], var_name='time')
-    melted['time'] = pd.to_datetime(melted['time'], infer_datetime_format=True)
-    melted = melted.dropna(subset=['value'])
-    return melted.groupby('time').aggregate({'value':'mean'})
-```
-
-# Step 5: ARIMA Modeling
-
-# Step 6: Interpreting Results
