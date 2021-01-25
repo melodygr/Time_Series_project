@@ -1,5 +1,5 @@
-# Analysis of Terry Stops in Seattle
-Flatiron Data Science Project - Phase 3
+# Time Series Analysis of Zillow Data
+Flatiron Data Science Project - Phase 4
 <img src= 
 "Images/No_Stopping.jpg" 
          alt="Stop Sign Image" 
