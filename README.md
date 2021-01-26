@@ -1,8 +1,8 @@
 # Time Series Analysis of Zillow Data
 Flatiron Data Science Project - Phase 4
 <img src= 
-"Images/No_Stopping.jpg" 
-         alt="Stop Sign Image" 
+"Images/melting_clock.jpg" 
+         alt="Melting Clock Image" 
          align="right"
          width="275" height="275"> 
          
