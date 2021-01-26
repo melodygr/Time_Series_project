@@ -12,12 +12,16 @@ Prepared and Presented by:  **_Melody Peterson_**
 [Presentation PDF](https://github.com/melodygr/Classification_Project/blob/main/Terry%20Stop%20Presentation.pdf "Presentation PDF")
 
 ### Business Problem    
-A Terry stop in the United States allows the police to briefly detain a person based on reasonable suspicion of involvement in criminal activity. Reasonable suspicion is a lower standard than probable cause which is needed for arrest. When police stop and search a pedestrian, this is commonly known as a stop and frisk. When police stop an automobile, this is known as a traffic stop. If the police stop a motor vehicle on minor infringements in order to investigate other suspected criminal activity, this is known as a pretextual stop. - [Wikipedia](https://en.wikipedia.org/wiki/Terry_stop#:~:text=A%20Terry%20stop%20in "Terry Stop Definition")
+You will be forecasting real estate prices of various zip codes using data from Zillow Research (Links to an external site.). For this project, you will be acting as a consultant for a fictional real-estate investment firm. The firm has asked you what seems like a simple question:  
 
-This classification project attempts to determine the possible demographic variables that determine the arrest outcome of a Terry stop. Modeling is done for inference only as making prediction with the model would be incorporating any possible human bias into the model.
+What are the top 5 best zip codes for us to invest in?  
+
+This may seem like a simple question at first glance, but there's more than a little ambiguity here that you'll have to think through in order to provide a solid recommendation. Should your recommendation be focused on profit margins only? What about risk? What sort of time horizon are you predicting against? Your recommendation will need to detail your rationale and answer any sort of lingering questions like these in order to demonstrate how you define "best".  
+
+In addition to deciding which quantitative metric(s) you want to target (e.g. minimizing mean squared error), you need to start with a definition of "best investment". Consider additional metrics like risk vs. profitability, or ROI yield.  
 
 ### Data    
-This data represents records of police reported stops under Terry v. Ohio, 392 U.S. 1 (1968).  The dataset was created on 04/12/2017 and first published on 05/22/2018 and is provided by the city of Seattle, WA.  There were 45,317 rows and 23 variables.  The classification target is ‘Arrest Flag’.  Initial ‘Arrest Flag’ distribution  ‘N’ - 42585, ‘Y’ - 2732  
+There are many datasets on the [Zillow Research Page](https://www.zillow.com/research/data/) , and making sure you have exactly what you need can be a bit confusing. For simplicity's sake, we have already provided the dataset for you in this repo -- you will find it in the file time-series/zillow_data.csv.  
 
 ### Modeling Process
 In the initial data cleaning/scrubbing phase, place holder values and missing values were treated in ways to best retain as much data as possible while keeping the integrity of the data.  Generally, missing values were binned together into 'Unknown' categories as can be seen in the histograms below.  
