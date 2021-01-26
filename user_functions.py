@@ -19,7 +19,7 @@ def visualize_time_series(df, name):
     plt.title(name)
     plt.xlabel('Year')
     plt.ylabel('Median House Price')
-    plt.savefig('images/zip_lineplot.png');
+    plt.savefig('Images/zip_lineplot.png');
     
     # Use pandas grouper to group values using annual frequency
     year_groups = df.groupby(pd.Grouper(freq ='A'))
@@ -34,11 +34,11 @@ def visualize_time_series(df, name):
     
     # Plot the yearly groups as subplots
     df_annual.plot(figsize = (13,20), subplots=True, legend=True)
-    plt.savefig('images/annual_breakout.png');
+    plt.savefig('Images/annual_breakout.png');
 
     # Plot overlapping yearly groups 
     df_annual.plot(figsize = (15,10), subplots=False, legend=True)
-    plt.savefig('images/annual_overlap.png');
+    plt.savefig('Images/annual_overlap.png');
     
 def visualize_all_series(list_of_df, names):
     """Plot a list of time series dataframes together with provided names for legend."""
@@ -48,7 +48,7 @@ def visualize_all_series(list_of_df, names):
     plt.title('Median House Prices Over Time')
     plt.xlabel('Year')
     plt.ylabel('Median House Price')
-    plt.savefig('images/lineplotallzips.png')
+    plt.savefig('Images/lineplotallzips.png')
     plt.show();
 
 def stationarity_check(TS):
@@ -70,7 +70,7 @@ def stationarity_check(TS):
     plt.plot(roll_std.dropna(), color='black', label = 'Rolling Std')
     plt.legend(loc='best')
     plt.title('Rolling Mean & Standard Deviation')
-    plt.savefig('images/rolling.png')
+    plt.savefig('Images/rolling.png')
     plt.show(block=False)
     
     # Print Dickey-Fuller test results
