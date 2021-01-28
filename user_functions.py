@@ -116,17 +116,22 @@ def run_arima_models(name, train, test, order, metrics_df, seasonal_order = (0,0
     
     return metrics_df
 
-def grid_search_arima(train):
+def grid_search_arima(train, d = 0):
     '''Attempt all pdq parameters to find lowest AIC value'''
     
     # Define the p, d and q parameters to take any value between 0 and 2
-    p = d = q = range(0, 3)
+    p = q = range(0, 3) #=d
 
-    # Generate all different combinations of p, q and q triplets
-    pdq = list(itertools.product(p, d, q))
+    # Generate all different combinations of p, d, and q triplets
+#     pdq = list(itertools.product(p, d, q))
+    pq = list(itertools.product(p, q))
+    pdq = [(x[0], d, x[1]) for x in pq]          
     
-    # Generate all different combinations of seasonal p, q and q triplets
-    pdqs = [(x[0], x[1], x[2], 12) for x in list(itertools.product(p, d, q))]
+    # Generate all different combinations of seasonal p, d, q and q triplets
+    
+    ps = ds = qs = range(0, 3)
+    psdsqs = list(itertools.product(ps, ds, qs))
+    pdqs = [(x[0], x[1], x[2], 12) for x in psdsqs]
     
     # Run a grid with pdq and seasonal pdq parameters calculated above and get the best AIC value
     ans = []
@@ -144,3 +149,88 @@ def grid_search_arima(train):
     
     return ans_df
 
+def run_preds_and_plot(model_results, train, test, name, best_diff):
+    '''Run predictions, forecasts, plot results, calculate RMSE'''
+    
+    # Calculate predictions and forecasts
+    pred = model_results.get_prediction(start=best_diff[name][0])
+    pred_forecast = model_results.get_forecast(steps=pd.to_datetime(test.index[-1]), dynamic=True)
+    pred_conf = pred.conf_int()
+    pred_forecast_conf = pred_forecast.conf_int()
+    
+    # Plot observations
+    all_data = pd.concat([train, test], axis=0)
+    ax = all_data.plot(label='observed', figsize=(12, 6))
+
+    # Plot predictions and forecasts with confidence intervals (unlogged)
+    np.exp(pred.predicted_mean).plot(label='Predictions', ax=ax)
+    np.exp(pred_forecast.predicted_mean).plot(label='Forecast', ax=ax)
+    ax.fill_between(np.exp(pred_conf).index,
+                    np.exp(pred_conf).iloc[:, 0],
+                    np.exp(pred_conf).iloc[:, 1], color='g', alpha=.3)
+
+    # Limit upper end of confidence interval so it doesn't blow up the graph
+    bound_conf=[]
+    for i in range(len(pred_forecast_conf)):
+        if np.exp(pred_forecast_conf).iloc[i,1] > 1.5*np.exp(pred_forecast.predicted_mean)[-1]:
+            bound_conf.append(1.5*np.exp(pred_forecast.predicted_mean)[-1])
+        else:
+            bound_conf.append(np.exp(pred_forecast_conf).iloc[i,1])
+    bound_df = pd.DataFrame(bound_conf, index=pred_forecast_conf.index, columns=['upper value'])
+    
+    ax.fill_between(np.exp(pred_forecast_conf).index,
+                    np.exp(pred_forecast_conf).iloc[:, 0],
+                    bound_df.iloc[:, 0], color='g', alpha=.3)
+#                     np.exp(pred_forecast_conf).iloc[:, 1], color='g', alpha=.3)
+    ax.fill_betweenx(ax.get_ylim(), test.index[0], test.index[-1], alpha=.1, zorder=-1)
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Median House Prices')
+    plt.legend()
+    imagename=str("Images/"+name+"pred.png")
+    plt.savefig(imagename)
+    plt.show()
+    
+    # Compute the train mean squared error
+    rmse_train = np.sqrt(((np.exp(pred.predicted_mean) - train.value[best_diff[name][0]:]) ** 2).mean())
+    print('The Root Mean Squared Error of {} predictions is {}'.format(name, round(rmse_train, 2)))
+
+    # Compute the test mean squared error
+    rmse_test = np.sqrt(((np.exp(pred_forecast.predicted_mean) - test.value) ** 2).mean())
+    print('The Root Mean Squared Error of {} forecasts is {}'.format(name, round(rmse_test, 2)))
+    
+    # Plot 2 years
+    ax = all_data.plot(label='observed', figsize=(12, 6))
+    np.exp(pred.predicted_mean).plot(label='Predictions', ax=ax)
+    np.exp(pred_forecast.predicted_mean).plot(label='Forecast', ax=ax)
+    ax.fill_between(np.exp(pred_conf).index,
+                    np.exp(pred_conf).iloc[:, 0],
+                    np.exp(pred_conf).iloc[:, 1], color='g', alpha=.3)
+
+    ax.fill_between(np.exp(pred_forecast_conf).index,
+                    np.exp(pred_forecast_conf).iloc[:, 0],
+                    bound_df.iloc[:, 0], color='g', alpha=.3)
+    ax.fill_between(np.exp(pred_forecast_conf).index,
+                    np.exp(pred_forecast_conf).iloc[:, 0],
+                    bound_df.iloc[:, 0], color='g', alpha=.3)
+    ax.fill_betweenx(ax.get_ylim(), Philly_test.index[0], Philly_test.index[-1], alpha=.1, zorder=-1)
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Median House Prices')
+    ax.set_xlim(xmin=Philly_train.index[-12])
+    plt.legend()
+    imagename=str("Images/2yr"+names[0][0]+"pred.png")
+    plt.savefig(imagename)
+plt.show()
+    
+    return pred, pred_forecast, rmse_train, rmse_test
+
+def track_final_metrics(grid_search, results, name):
+    '''Add model parameters and results to a dictionary and return'''
+    
+    metrics = {'name':name, 'order':grid_search['pdq'].loc[grid_search['aic'].idxmin()],
+                'seasonal order':grid_search['pdqs'].loc[grid_search['aic'].idxmin()]}
+    for i in range(len(results.params)):
+        metrics.update({results.params.index[i]:round(results.params[i], 4)})
+
+    metrics.update({'aic':round(results.aic, 2)})
+               
+    return metrics
