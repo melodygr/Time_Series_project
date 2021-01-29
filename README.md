@@ -43,15 +43,17 @@ Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes
          width="700" height="224">  
          
 <img src= 
-"Images/final_models.png" 
+"Images/final_model_params.png" 
          alt="Final Models" 
          align="center"
-         width="500" height="200">           
+         width="900" height="300">           
          
-### Model Parameter Comparison
-The features importances of the two top performing model types show very little in common.
-![Forest2](https://github.com/melodygr/Classification_Project/blob/main/Images/forest_feat.png "Forest2")
-![xgb_clf4](https://github.com/melodygr/Classification_Project/blob/main/Images/xgb_feat.png "xgb_clf4")  
+### Model ROI Comparison
+<img src= 
+"Images/final_model_forecast_ROI.png" 
+         alt="Final Models" 
+         align="center"
+         width="800" height="224">  
 
 ### Conclusions  
 * Call Type of 911 appears to be important to the models
