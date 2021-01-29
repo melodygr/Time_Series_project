@@ -41,20 +41,23 @@ Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes
          alt="Baseline Models" 
          align="center"
          width="700" height="200">   
-         
-
+ 
+<br />  
+<br />  
 Final Seasonal ARIMA model parameters            
-  
-       
+<br />  
+<br />  
 <img src= 
 "Images/final_model_params.png" 
          alt="Final Models" 
          align="center"
          width="900" height="300">            
          
-         
+<br />
+<br />
 ### Model ROI Comparison  
-  
+<br />
+<br />
   
 <img src= 
 "Images/final_model_forecast_ROI.png" 
