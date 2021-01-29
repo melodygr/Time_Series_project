@@ -34,7 +34,7 @@ This graph of the Philadelphia data shows how each time series can be broken out
 
 ![Decomposition](https://github.com/melodygr/dsc-phase-4-project/blob/main/Images/decomposition.png "ROI vs Median House Price")
 
-Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes to establish a baseline for future models, and then several models were run and parameters tuned to find the model with the least error.  
+Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes to establish a baseline for future models, and then several models were run and parameters tuned to find the model with the least error.
 <br />  
 <br />  
 <img src= 
