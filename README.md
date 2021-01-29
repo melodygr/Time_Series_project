@@ -40,7 +40,7 @@ Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes
 "Images/baseline.png" 
          alt="Baseline Models" 
          align="center"
-         width="500" height="160">  
+         width="700" height="224">  
          
 <img src= 
 "Images/final_models.png" 
