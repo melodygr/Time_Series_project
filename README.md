@@ -40,34 +40,43 @@ Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes
 "Images/baseline.png" 
          alt="Baseline Models" 
          align="center"
-         width="700" height="224">  
+         width="700" height="200">   
          
+
+Final Seasonal ARIMA model parameters            
+  
+       
 <img src= 
 "Images/final_model_params.png" 
          alt="Final Models" 
          align="center"
-         width="900" height="300">           
+         width="900" height="300">            
          
-### Model ROI Comparison
+         
+### Model ROI Comparison  
+  
+  
 <img src= 
 "Images/final_model_forecast_ROI.png" 
          alt="Final Models" 
          align="center"
-         width="800" height="224">  
+         width="700" height="160">  
 
 ### Conclusions  
-* Call Type of 911 appears to be important to the models
-* Other 'Unknown' variables need to be reassessed
-* Recommend engineering new target and features and remodeling
 
-This may seem like a simple question at first glance, but there's more than a little ambiguity here that you'll have to think through in order to provide a solid recommendation. Should your recommendation be focused on profit margins only? What about risk? What sort of time horizon are you predicting against? Your recommendation will need to detail your rationale and answer any sort of lingering questions like these in order to demonstrate how you define "best".  
-
-In addition to deciding which quantitative metric(s) you want to target (e.g. minimizing mean squared error), you need to start with a definition of "best investment". Consider additional metrics like risk vs. profitability, or ROI yield.  
-
+* All training data outperformed the test data.
+* The models are all very skewed because of the market crash in 2009.
+* Columbus and Daytona had very large confidence intervals and overly high forecasts.
+* Chattanooga has outperformed even the confidence intervals of the model.
+* Philadelphia is potentially a good 50K investment , Indianapolis at 75K and Chattanooga at 100K investment
+  
+### Caveats:  
+  
+* Logged and differenced the data but some still did not test as stationary according to the Dickey Fuller test.
+* Real estate predictions can vary due to unseen fluctuations in the market  
+  
 ### Next Steps / Future Work  
-1. Further analyze unknown or missing values
-1. Update ‘Arrest Flag’ with arrest values from ‘Stop Resolution’
-1. Try no SMOTE
-1. Tune Support Vector Classification
-
+  
+* Obtain current data after 2018 for current predictions. Found zip data on Redfin but it is rolling avg by zip code.
+* Investigate why some of the models seem so far off in their forecasts.
 
