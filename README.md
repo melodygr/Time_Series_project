@@ -37,20 +37,16 @@ This graph of the Philadelphia data shows how each time series can be broken out
 Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes to establish a baseline for future models, and then several models were run and parameters tuned to find the model with the least error.  
 
 <img src= 
-"Images/model_performance.png" 
-         alt="Model Performance" 
+"Images/baseline.png" 
+         alt="Baseline Models" 
          align="center"
-         width="500" height="300">  
+         width="500" height="160">  
          
-### Misclassified Data
-For the final model, you can see in this graph how the model classified the data versus the actual classifications of the data.  Test accuracy of 67% means
-32.46% of data misclassified.  Of 708 arrests, 35% were classified as arrests.  There were 245 true positives and 63% of positives were misclassified.  
-  
 <img src= 
-"Images/conf_matrix_xgb4.png" 
-         alt="Confusion Matrix" 
+"Images/final_models.png" 
+         alt="Final Models" 
          align="center"
-         width="350" height="300">  
+         width="500" height="200">           
          
 ### Model Parameter Comparison
 The features importances of the two top performing model types show very little in common.
