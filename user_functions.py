@@ -205,21 +205,20 @@ def run_preds_and_plot(model_results, train, test, name, best_diff):
     ax.fill_between(np.exp(pred_conf).index,
                     np.exp(pred_conf).iloc[:, 0],
                     np.exp(pred_conf).iloc[:, 1], color='g', alpha=.3)
-
     ax.fill_between(np.exp(pred_forecast_conf).index,
                     np.exp(pred_forecast_conf).iloc[:, 0],
                     bound_df.iloc[:, 0], color='g', alpha=.3)
     ax.fill_between(np.exp(pred_forecast_conf).index,
                     np.exp(pred_forecast_conf).iloc[:, 0],
                     bound_df.iloc[:, 0], color='g', alpha=.3)
-    ax.fill_betweenx(ax.get_ylim(), Philly_test.index[0], Philly_test.index[-1], alpha=.1, zorder=-1)
+    ax.fill_betweenx(ax.get_ylim(), test.index[0], test.index[-1], alpha=.1, zorder=-1)
     ax.set_xlabel('Date')
     ax.set_ylabel('Median House Prices')
-    ax.set_xlim(xmin=Philly_train.index[-12])
+    ax.set_xlim(xmin=train.index[-12])
     plt.legend()
-    imagename=str("Images/2yr"+names[0][0]+"pred.png")
+    imagename=str("Images/2yr"+name+"pred.png")
     plt.savefig(imagename)
-plt.show()
+    plt.show()
     
     return pred, pred_forecast, rmse_train, rmse_test
 
