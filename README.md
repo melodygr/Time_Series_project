@@ -52,7 +52,7 @@ Final Seasonal ARIMA model parameters
 "Images/final_model_params.png" 
          alt="Final Models" 
          align="center"
-         width="900" height="300">            
+         width="900" height="260">            
          
 <br />  
 <br />  
