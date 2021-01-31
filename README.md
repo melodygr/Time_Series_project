@@ -9,7 +9,7 @@ Flatiron Data Science Project - Phase 4
 <!---Photo by Kevork Kurdoghlian on Unsplash--->       
 <!---<span>Photo by <a href="https://unsplash.com/@pedroplus?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Pedro da Silva</a> on <a href="https://unsplash.com/s/photos/stop-sign?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>--->
 Prepared and Presented by:  **_Melody Peterson_**  
-[Presentation PDF](https://github.com/melodygr/Classification_Project/blob/main/Terry%20Stop%20Presentation.pdf "Presentation PDF")
+[Presentation PDF](https://github.com/melodygr/dsc-phase-4-project/blob/main/Zillow_Presentation.pdf "Presentation PDF")
 
 ### Business Problem    
 For this analysis I will be working as a Data Scientist for a financial investment firm that is looking for short-term real estate investment opportunities for it's smaller investors to diversify their investment profiles.  I will be analyzing median monthly housing sales prices for over 14,000 United States zipcodes and choosing the best areas to further analyze for potential investment. I will then forecast future real estate prices in those zip codes.   
