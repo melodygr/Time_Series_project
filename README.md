@@ -57,6 +57,16 @@ Final Seasonal ARIMA model parameters
 <br />  
 <br />  
 
+### Model Predictions  
+<br/>
+<br/>  
+<img src= 
+"Images/six_graphs.png" 
+         alt="Model Predictions" 
+         align="center"
+         width="900" height="260"> 
+<br/>  
+<br/>  
 ### Model ROI Comparison  
 <br />  
 <br />  
