@@ -167,7 +167,7 @@ def run_preds_and_plot(model_results, train, test, name, best_diff):
     np.exp(pred_forecast.predicted_mean).plot(label='Forecast', ax=ax)
     ax.fill_between(np.exp(pred_conf).index,
                     np.exp(pred_conf).iloc[:, 0],
-                    np.exp(pred_conf).iloc[:, 1], color='g', alpha=.3)
+                    np.exp(pred_conf).iloc[:, 1], color='#F5B14C', alpha=.3)
 
     # Limit upper end of confidence interval so it doesn't blow up the graph
     bound_conf=[]
@@ -180,7 +180,7 @@ def run_preds_and_plot(model_results, train, test, name, best_diff):
     
     ax.fill_between(np.exp(pred_forecast_conf).index,
                     np.exp(pred_forecast_conf).iloc[:, 0],
-                    bound_df.iloc[:, 0], color='g', alpha=.3)
+                    bound_df.iloc[:, 0], color='#F5B14C', alpha=.3)
 #                     np.exp(pred_forecast_conf).iloc[:, 1], color='g', alpha=.3)
     ax.fill_betweenx(ax.get_ylim(), test.index[0], test.index[-1], alpha=.1, zorder=-1)
     ax.set_xlabel('Date')
@@ -204,13 +204,10 @@ def run_preds_and_plot(model_results, train, test, name, best_diff):
     np.exp(pred_forecast.predicted_mean).plot(label='Forecast', ax=ax)
     ax.fill_between(np.exp(pred_conf).index,
                     np.exp(pred_conf).iloc[:, 0],
-                    np.exp(pred_conf).iloc[:, 1], color='g', alpha=.3)
+                    np.exp(pred_conf).iloc[:, 1], color='#F5B14C', alpha=.3)
     ax.fill_between(np.exp(pred_forecast_conf).index,
                     np.exp(pred_forecast_conf).iloc[:, 0],
-                    bound_df.iloc[:, 0], color='g', alpha=.3)
-    ax.fill_between(np.exp(pred_forecast_conf).index,
-                    np.exp(pred_forecast_conf).iloc[:, 0],
-                    bound_df.iloc[:, 0], color='g', alpha=.3)
+                    bound_df.iloc[:, 0], color='#F5B14C', alpha=.3)
     ax.fill_betweenx(ax.get_ylim(), test.index[0], test.index[-1], alpha=.1, zorder=-1)
     ax.set_xlabel('Date')
     ax.set_ylabel('Median House Prices')
