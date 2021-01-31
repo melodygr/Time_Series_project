@@ -86,5 +86,5 @@ Final Seasonal ARIMA model parameters
 * Investigate why some of the models seem so far off in their forecasts.
 * Try Facebook Prophet with each of the chosen zip codes
 * Try other methods of choosing zip codes, including clustering to find trends
-
+* Look for exogenous data to add to the model
 
