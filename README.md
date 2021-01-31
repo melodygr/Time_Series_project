@@ -69,7 +69,7 @@ Final Seasonal ARIMA model parameters
 
 ### Conclusions  
 
-* All training data outperformed the test data.
+* All training data far outperformed the test data, indicating some overfitting.
 * The models are all very skewed because of the market crash in 2009.
 * Columbus and Daytona had very large confidence intervals and overly high forecasts.
 * Chattanooga has outperformed even the confidence intervals of the model.
@@ -82,6 +82,9 @@ Final Seasonal ARIMA model parameters
   
 ### Next Steps / Future Work  
   
-* Obtain current data after 2018 for current predictions. Found zip data on Redfin but it is rolling avg by zip code.
+* Obtain current data after 2018 for current predictions. Found zip code data on Redfin but it is rolling avg by zip code.
 * Investigate why some of the models seem so far off in their forecasts.
+* Try Facebook Prophet with each of the chosen zip codes
+* Try other methods of choosing zip codes, including clustering to find trends
+
 
