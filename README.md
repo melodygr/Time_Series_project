@@ -53,7 +53,6 @@ Final Seasonal ARIMA model parameters
          alt="Final Models" 
          align="center"
          width="900" height="260">            
-         
 <br />  
 <br />  
 
@@ -67,6 +66,7 @@ Final Seasonal ARIMA model parameters
          width="900" height="260"> 
 <br/>  
 <br/>  
+
 ### Model ROI Comparison  
 <br />  
 <br />  
