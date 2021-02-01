@@ -36,7 +36,6 @@ This graph of the Philadelphia data shows how each time series can be broken out
 
 Initial ARMA (Auto-regressive Moving Average) models were run on all 6 zip codes to establish a baseline for future models, and then several models were run and parameters tuned to find the model with the least error.
 <br />  
-<br />  
 <img src= 
 "Images/baseline.png" 
          alt="Baseline Models" 
@@ -53,20 +52,18 @@ Final Seasonal ARIMA model parameters
          alt="Final Models" 
          align="center"
          width="900" height="260">            
-         
-<br />  
 <br />  
 
 ### Model Predictions  
-<br/>
 <br/>  
 <img src= 
 "Images/six_graphs.png" 
          alt="Model Predictions" 
          align="center"
-         width="900" height="260"> 
+         width="1000" height="350"> 
 <br/>  
 <br/>  
+
 ### Model ROI Comparison  
 <br />  
 <br />  
